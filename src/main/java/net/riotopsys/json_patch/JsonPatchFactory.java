@@ -2,6 +2,7 @@ package net.riotopsys.json_patch;
 
 import com.google.gson.*;
 import net.riotopsys.json_patch.operation.AddOperation;
+import net.riotopsys.json_patch.operation.MoveOperation;
 import net.riotopsys.json_patch.operation.RemoveOperation;
 import net.riotopsys.json_patch.operation.ReplaceOperation;
 
@@ -98,10 +99,25 @@ public class JsonPatchFactory {
 
             if ( !valueA.equals(valueB)) {
 
-                //look for move
-                //look for copy
-                //fuck it
-//                patch.addLast(new ReplaceOperation( path.append(c), valueB ));
+                //see if valueB is in later position of elementA and bring it forward
+                for ( int b = c+1; b < elementA.size(); b++ ){
+                    if ( elementA.get(b).equals(valueB) ){
+                        patch.add(new MoveOperation(path.append(b), path.append(c)));
+                        return true;
+                    }
+                }
+
+                //see if valueA exists later in elementB
+//                        for ( int d = d+1; d < elementB.size(); d++ ) {
+//                            if ( elementB.get(b).equals(valueA)){
+//                                patch.add(new AddOperation(path.append(c), valueB));
+//                                return true;
+//                            }
+//                        }
+
+
+//                patch.add(new RemoveOperation(path.append(c) ));
+
                 processPatch(patch, path.append(c), valueA, valueB);
 
                 return true;

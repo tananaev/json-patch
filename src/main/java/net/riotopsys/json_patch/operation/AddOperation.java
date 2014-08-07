@@ -35,7 +35,7 @@ public class AddOperation extends AbsOperation {
 
             JsonArray array = item.getAsJsonArray();
 
-            int index = (path.tail().equals("-")) ? array.size() : Integer.getInteger(path.tail());
+            int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
             List<JsonElement> list = getBackingList( array );
             list.add(index, data);

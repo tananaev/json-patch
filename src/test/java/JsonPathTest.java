@@ -47,7 +47,7 @@ public class JsonPathTest {
 
         Assert.assertEquals("/a/0/b/c", path.append("c").toString());
 
-        Assert.assertEquals("/a/0/b/c/d/e", path.append("d/e").toString());
+        Assert.assertEquals("/a/0/b/d/e", path.append("d/e").toString());
 
     }
 

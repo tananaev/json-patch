@@ -48,6 +48,12 @@ public class JsonPatchFactoryTest {
             temp2[0] = singleCase;
             temp.add(temp2);
         }
+//        int index = 14;//remove and add on same data should be move;
+//        int index = 15;//remove and add on same data should be move;
+
+        int index = 17;
+
+//        return temp.subList(index, index+1);
         return temp;
     }
 

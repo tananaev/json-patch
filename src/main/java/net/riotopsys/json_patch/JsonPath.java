@@ -21,7 +21,7 @@ public class JsonPath {
     }
 
     private JsonPath(List<String> path) {
-        this.path = path;
+        this.path = new ArrayList<String>(path);
     }
 
     @Override
