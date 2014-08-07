@@ -100,6 +100,17 @@ public class JsonPatchFactory {
             if ( !valueA.equals(valueB)) {
 
                 //see if valueB is in later position of elementA and bring it forward
+                for ( int b = c+1; b < elementB.size(); b++ ){
+                    if ( elementB.get(b).equals(valueA) ){
+                        if ( b >= elementA.size() ){
+                            break;
+                        }
+                        patch.add(new MoveOperation(path.append(c),path.append(b)));
+                        return true;
+                    }
+                }
+
+                //see if valueB is in later position of elementA and bring it forward
                 for ( int b = c+1; b < elementA.size(); b++ ){
                     if ( elementA.get(b).equals(valueB) ){
                         patch.add(new MoveOperation(path.append(b), path.append(c)));
@@ -107,16 +118,16 @@ public class JsonPatchFactory {
                     }
                 }
 
-                //see if valueA exists later in elementB
-//                        for ( int d = d+1; d < elementB.size(); d++ ) {
-//                            if ( elementB.get(b).equals(valueA)){
-//                                patch.add(new AddOperation(path.append(c), valueB));
-//                                return true;
-//                            }
+//                //see if valueB is in later position of elementA and bring it forward
+//                for ( int b = c+1; b < elementB.size(); b++ ){
+//                    if ( elementB.get(b).equals(valueA) ){
+//                        if ( b >= elementA.size() ){
+//                            break;
 //                        }
-
-
-//                patch.add(new RemoveOperation(path.append(c) ));
+//                        patch.add(new MoveOperation(path.append(c),path.append(b)));
+//                        return true;
+//                    }
+//                }
 
                 processPatch(patch, path.append(c), valueA, valueB);
 
