@@ -78,6 +78,7 @@ public class JsonPatchFactoryTest {
         Assert.assertEquals(testCase.second, result);
 
         System.out.println(String.format("running ...\nA: '%s'\nB: '%s'\nC: '%s'\npatch\n%s\n--------------\n\n", testCase.first, testCase.second, result, gson.toJson(patch)));
+        System.out.flush();
     }
 
 }

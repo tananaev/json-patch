@@ -52,9 +52,9 @@ public class JsonPatchFactory {
         SortedSet<String> elementBProps = extractProps(elementB);
 
         for ( String prop : elementAProps ){
+                JsonElement aValue = elementA.get(prop);
             if ( elementB.has( prop ) ){
                 elementBProps.remove(prop);
-                JsonElement aValue = elementA.get(prop);
                 JsonElement bValue = elementB.get(prop);
                 if ( aValue.equals(bValue) ) {
                     // items fully match
@@ -66,7 +66,15 @@ public class JsonPatchFactory {
 
             } else {
                 //item in original but not in target
+
                 //look for move
+                for ( String bProp: elementBProps ){
+                    if ( elementB.get(bProp).equals(aValue) ){
+                        patch.addLast(new MoveOperation(path.append(prop), path.append(bProp)));
+                        return true;
+                    }
+                }
+
                 //fuck it
                 patch.addLast(new RemoveOperation(path.append(prop)));
                 return true;
