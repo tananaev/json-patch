@@ -15,12 +15,14 @@ public class JsonPatchFactory {
 
     public JsonPatch create( JsonElement elementA, JsonElement elementB ){
         JsonPatch patch = new JsonPatch();
+        PostProcessor pp = new PostProcessor();
 
         boolean loop = true;
 
         while ( loop ) {
             JsonElement temp = patch.apply( elementA );
             loop = processPatch(patch, new JsonPath("/"), temp, elementB);
+            pp.process(patch);
         }
 
         return patch;

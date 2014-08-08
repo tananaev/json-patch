@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class MoveOperation extends AbsOperation{
 
-    private final JsonPath from;
+    public final JsonPath from;
 
     public MoveOperation(JsonPath from, JsonPath path) {
         this.path = path;
