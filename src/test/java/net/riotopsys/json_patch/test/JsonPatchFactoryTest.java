@@ -1,3 +1,5 @@
+package net.riotopsys.json_patch.test;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -7,13 +9,12 @@ import net.riotopsys.json_patch.JsonPatchFactory;
 import net.riotopsys.json_patch.JsonPath;
 import net.riotopsys.json_patch.gson.JsonPathDeserializer;
 import net.riotopsys.json_patch.gson.JsonPathSerializer;
+import net.riotopsys.json_patch.test.util.JsonPatchTestCase;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import util.JsonPatchTestCase;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -48,12 +49,12 @@ public class JsonPatchFactoryTest {
             temp2[0] = singleCase;
             temp.add(temp2);
         }
-//        int index = 14;//remove and add on same data should be move;
-//        int index = 15;//remove and add on same data should be move;
 
-        int index = 17;
+//        int index = 17;
+//        int index = 18;
 
 //        return temp.subList(index, index+1);
+//        return temp.subList(17, 19);
         return temp;
     }
 

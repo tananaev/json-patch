@@ -1,4 +1,4 @@
-package util;
+package net.riotopsys.json_patch.test.util;
 
 import com.google.gson.JsonElement;
 

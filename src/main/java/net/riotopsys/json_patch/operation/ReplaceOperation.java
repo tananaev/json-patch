@@ -43,9 +43,11 @@ public class ReplaceOperation extends AbsOperation {
 
             int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
-            List<JsonElement> list = getBackingList( array );
-            list.remove(index);
-            list.add(index, data);
+            array.remove(index);
+
+//            List<JsonElement> list = getBackingList( array );
+//            list.remove(index);
+//            list.add(index, data);
 
         } else {
             return data;

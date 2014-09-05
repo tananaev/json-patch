@@ -1,3 +1,5 @@
+package net.riotopsys.json_patch.test;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;

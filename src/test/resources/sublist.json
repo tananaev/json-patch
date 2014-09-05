@@ -1,0 +1,45 @@
+[
+    {
+       "name": "equal",
+        "A": ["a","b","c","d","e","f","g"],
+        "B": ["a","b","c","d","e","f","g"],
+        "expected": ["a","b","c","d","e","f","g"]
+    },
+    {
+       "name": "half front",
+        "A": ["a","b","c","d","e","f","g"],
+        "B": ["a","b","c"],
+        "expected": ["a","b","c"]
+    },
+    {
+       "name": "half back",
+        "A": ["a","b","c","d","e","f","g"],
+        "B": ["d","e","f","g"],
+        "expected": ["d","e","f","g"]
+    },
+    {
+       "name": "half front inverted",
+        "B": ["a","b","c","d","e","f","g"],
+        "A": ["a","b","c"],
+        "expected": ["a","b","c"]
+    },
+    {
+       "name": "half back inverted",
+        "B": ["a","b","c","d","e","f","g"],
+        "A": ["d","e","f","g"],
+        "expected": ["d","e","f","g"]
+    },
+    {
+       "name": "opposing options",
+        "A": ["a","b","c","X","e","f","g"],
+        "B": ["a","b","c","d","e","f","g"],
+        "expected": ["a","b","c"]
+    },
+    {
+       "name": "end",
+        "A": ["a","b","c","d","e","f","g"],
+        "B": ["e","f","g"],
+        "expected": ["e","f","g"]
+    }
+
+]

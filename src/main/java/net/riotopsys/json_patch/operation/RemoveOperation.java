@@ -28,9 +28,11 @@ public class RemoveOperation extends AbsOperation{
         JsonElement item = path.head().navigate(result);
 
         if ( item.isJsonObject() ){
-            Map<String, JsonElement> map = getBackingMap(item.getAsJsonObject());
+//            Map<String, JsonElement> map = getBackingMap(item.getAsJsonObject());
 
-            map.remove(path.tail());
+//            map.remove(path.tail());
+
+            item.getAsJsonObject().remove(path.tail());
 
         } else if ( item.isJsonArray() ){
 
@@ -38,8 +40,7 @@ public class RemoveOperation extends AbsOperation{
 
             int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
-            List<JsonElement> list = getBackingList( array );
-            list.remove(index);
+           array.remove(index);
 
         }
 

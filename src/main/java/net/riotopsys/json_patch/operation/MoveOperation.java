@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.riotopsys.json_patch.JsonPath;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,17 +38,19 @@ public class MoveOperation extends AbsOperation{
 
         //remove from source
         if ( source.isJsonObject() ){
-            Map<String, JsonElement> map = getBackingMap(source.getAsJsonObject());
+//            Map<String, JsonElement> map = getBackingMap(source.getAsJsonObject());
 
-            map.remove(from.tail());
+            source.getAsJsonObject().remove(from.tail());
 
         } else if ( source.isJsonArray() ){
             JsonArray array = source.getAsJsonArray();
 
             int index = (from.tail().equals("-")) ? array.size() : Integer.valueOf(from.tail());
 
-            List<JsonElement> list = getBackingList( array );
-            list.remove(index);
+            array.remove(index);
+
+//            List<JsonElement> list = getBackingList( array );
+//            list.remove(index);
         }
 
         //add to destination
@@ -55,11 +59,28 @@ public class MoveOperation extends AbsOperation{
         } else if ( destination.isJsonArray() ){
 
             JsonArray array = destination.getAsJsonArray();
+//
+//            int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
+//
+//            List<JsonElement> list = getBackingList( array );
+//            list.add(index, value);
 
             int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
-            List<JsonElement> list = getBackingList( array );
-            list.add(index, value);
+            List<JsonElement> temp = new ArrayList<JsonElement>();
+
+            Iterator<JsonElement> iter = array.iterator();
+            while (iter.hasNext()){
+                JsonElement stuff = iter.next();
+                iter.remove();
+                temp.add( stuff );
+            }
+
+            temp.add(index, value);
+
+            for ( JsonElement stuff: temp ){
+                array.add(stuff);
+            }
         }
 
         return result;

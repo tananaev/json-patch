@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.riotopsys.json_patch.JsonPath;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,8 +39,20 @@ public class AddOperation extends AbsOperation {
 
             int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
-            List<JsonElement> list = getBackingList( array );
-            list.add(index, data);
+            List<JsonElement> temp = new ArrayList<JsonElement>();
+
+            Iterator<JsonElement> iter = array.iterator();
+            while (iter.hasNext()){
+                JsonElement stuff = iter.next();
+                iter.remove();
+                temp.add( stuff );
+            }
+
+            temp.add(index, data);
+
+            for ( JsonElement stuff: temp ){
+               array.add(stuff);
+            }
 
         }
 

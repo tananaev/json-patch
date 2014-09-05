@@ -19,7 +19,7 @@ public class PostProcessor {
 
         if ( operation.getOperationName().equals("remove")){
             if ( isNumeric(operation.path.tail()) ) {
-                unwindMoves(patch);
+//                unwindMoves(patch);
             }
 
         }
@@ -39,17 +39,24 @@ public class PostProcessor {
                     if ( priorMove.path.head().equals(priorMove.from.head())){
                         //move is within local element
 
-//                        if ( removeOperation.path.equals(priorMove.from) ){
+                        try {
                             int removeIndex = Integer.parseInt(removeOperation.path.tail());
-                            int moveIndev = Integer.parseInt(priorMove.path.tail());
-                            if ( removeIndex - moveIndev == 1 ){
-                                removeOperation.path = priorMove.path;
-                            }
+                            int moveToIndex = Integer.parseInt(priorMove.path.tail());
+                            int moveFromIndex = Integer.parseInt(priorMove.from.tail());
 
-//                        } else {
-//                            patch.addLast(priorOperation);
-//                            break;
-//                        }
+                            if (moveToIndex < moveFromIndex) {
+
+                                if (removeIndex - moveToIndex == 1) {
+                                    removeOperation.path = priorMove.path;
+                                }
+                            } else {
+                                patch.addLast(priorOperation);
+                                break;
+                            }
+                        } catch ( NumberFormatException e){
+                            patch.addLast(priorOperation);
+                            break;
+                        }
 
                     } else {
                         patch.addLast(priorOperation);

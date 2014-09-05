@@ -37,27 +37,27 @@ public abstract class AbsOperation {
         return new JsonParser().parse(original.toString());
     }
 
-    protected List<JsonElement> getBackingList(JsonArray array) {
-        try {
-            Field f = array.getClass().getDeclaredField("elements");
-            f.setAccessible(true);
-            return (List<JsonElement>) f.get(array);
-        } catch (NoSuchFieldException e) {
-            throw new JsonPatchException( e );
-        } catch (IllegalAccessException e) {
-            throw new JsonPatchException( e );
-        }
-    }
-
-    protected Map<String, JsonElement> getBackingMap(JsonObject object) {
-        try {
-            Field f = object.getClass().getDeclaredField("members");
-            f.setAccessible(true);
-            return (Map<String, JsonElement>) f.get(object);
-        } catch (NoSuchFieldException e) {
-            throw new JsonPatchException( e );
-        } catch (IllegalAccessException e) {
-            throw new JsonPatchException( e );
-        }
-    }
+//    protected List<JsonElement> getBackingList(JsonArray array) {
+//        try {
+//            Field f = array.getClass().getDeclaredField("elements");
+//            f.setAccessible(true);
+//            return (List<JsonElement>) f.get(array);
+//        } catch (NoSuchFieldException e) {
+//            throw new JsonPatchException( e );
+//        } catch (IllegalAccessException e) {
+//            throw new JsonPatchException( e );
+//        }
+//    }
+//
+//    protected Map<String, JsonElement> getBackingMap(JsonObject object) {
+//        try {
+//            Field f = object.getClass().getDeclaredField("members");
+//            f.setAccessible(true);
+//            return (Map<String, JsonElement>) f.get(object);
+//        } catch (NoSuchFieldException e) {
+//            throw new JsonPatchException( e );
+//        } catch (IllegalAccessException e) {
+//            throw new JsonPatchException( e );
+//        }
+//    }
 }
