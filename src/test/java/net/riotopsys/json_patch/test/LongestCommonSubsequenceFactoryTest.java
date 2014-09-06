@@ -58,7 +58,7 @@ public class LongestCommonSubsequenceFactoryTest {
 
     @Test
     public void runCase(){
-        LongestCommonSubsequenceFactory<String> lcsf = new LongestCommonSubsequenceFactory<String>();
+        LongestCommonSubsequenceFactory lcsf = new LongestCommonSubsequenceFactory();
 
         List<String> result = lcsf.search(testCase.A, testCase.B);
 

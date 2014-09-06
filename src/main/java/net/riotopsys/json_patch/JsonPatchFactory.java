@@ -13,6 +13,8 @@ import java.util.*;
  */
 public class JsonPatchFactory {
 
+    private LongestCommonSubsequenceFactory lcsf = new LongestCommonSubsequenceFactory();
+
     public JsonPatch create( JsonElement elementA, JsonElement elementB ){
         JsonPatch patch = new JsonPatch();
         PostProcessor pp = new PostProcessor();
@@ -22,7 +24,7 @@ public class JsonPatchFactory {
         while ( loop ) {
             JsonElement temp = patch.apply( elementA );
             loop = processPatch(patch, new JsonPath("/"), temp, elementB);
-            pp.process(patch);
+//            pp.process(patch);
         }
 
         return patch;
@@ -102,46 +104,252 @@ public class JsonPatchFactory {
     }
 
     private boolean processArrayPatch( JsonPatch patch, JsonPath path, JsonArray elementA, JsonArray elementB ) {
-        int c;
-        for ( c=0; c < elementA.size() && c < elementB.size(); c++ ){
-            JsonElement valueA = elementA.get(c);
-            JsonElement valueB = elementB.get(c);
+        List<JsonElement> listA = convertToList(elementA);
+        List<JsonElement> listB = convertToList(elementB);
 
-            if ( !valueA.equals(valueB)) {
+        if ( listA.isEmpty() ){
+            patch.add( new AddOperation(path.append("-"),listB.get(0) ));
+            return true;
+        }
 
-                //see if valueB is in later position of elementA and bring it forward
-                for ( int b = c+1; b < elementA.size(); b++ ){
-                    if ( elementA.get(b).equals(valueB) ){
-                        patch.add(new MoveOperation(path.append(b), path.append(c)));
-                        return true;
-                    }
-                }
+        List<JsonElement> common = lcsf.search(listA, listB);
 
-                //see if valueA is in later position of elementB and toss it back
-                for ( int b = c+1; b < elementB.size(); b++ ){
-                    if ( elementB.get(b).equals(valueA) ){
-                        if ( b >= elementA.size() ){
-                            break;
+        int startOfCommonInA = lcsf.findStartIndex(common, listA);
+        int startOfCommonInB = lcsf.findStartIndex(common, listB);
+
+        if ( startOfCommonInA > 0 ){
+            //common subsequence does not start a
+
+            //move on position before to extend lcs
+            JsonElement original = listA.get(startOfCommonInA - 1);
+            JsonElement target = null;
+            try {
+               target = listB.get(startOfCommonInB - 1);
+            } catch ( IndexOutOfBoundsException e ){
+//                try other side?
+//                try {
+//                    target = listB.get(startOfCommonInB + common.size());
+//                } catch ( IndexOutOfBoundsException e2 ){
+//                    //fuck me
+//                }
+            }
+
+            if ( listB.contains(original) && listA.contains(target) ){
+                //we can move or copy the target from where its located
+                //we leave the original and the common the fuck alone
+
+                if ( common.contains(target) ){
+                    //so target is in common and also outside of common lets call this a copy
+                    for ( Integer i: findOccurnacesIn(original, listB)){
+                        if ( i >= startOfCommonInA || i < startOfCommonInA + listA.size() ){
+                            //TODO add copy operation
+//                            patch.add(new CopyOperation(path.append(i), path.append(i) ) );
+                            patch.add( new AddOperation(path.append(startOfCommonInA),target ));
+                            return true;
                         }
-                        patch.add(new MoveOperation(path.append(c),path.append(b)));
+                    }
+                    throw new JsonPatchException("theoretically Unreachable");
+
+                } else {
+                    //move target in then?
+                    int from = listA.indexOf(target);
+                    int to = startOfCommonInA;
+                    if ( from < to ){
+                        to--;
+                    }
+
+                    patch.add(new MoveOperation(path.append(from), path.append(to) ) );
+                    return true;
+                }
+            }
+
+            if ( listB.contains(original) && !listA.contains(target) ){
+//                //original exist but not here and target is something new
+//                //dont fuck with the target and just move the original and don't fuck with common
+//                for ( Integer i: findOccurnacesIn(original, listB)){
+//                    if ( i < startOfCommonInB || i > startOfCommonInB + listB.size()-1 ){
+//                        patch.add(new MoveOperation(path.append(startOfCommonInA), path.append(i) ) );
+//                        return true;
+//                    }
+//                }
+//
+//                //must be unneeded if we made it here
+//                patch.add(new RemoveOperation(path.append(startOfCommonInA - 1)));
+//                return true;
+                if ( target != null ) {
+                    patch.add(new AddOperation(path.append(startOfCommonInA), target));
+                    return true;
+                } else {
+                    for ( Integer i: findOccurnacesIn(original, listB)) {
+                        if (i >= startOfCommonInA || i < startOfCommonInA + listA.size()) {
+                            patch.add(new MoveOperation(path.append(startOfCommonInA-1), path.append(i)));
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            if ( !listB.contains(original)  ){
+                //add or alter
+                if ( startOfCommonInA == startOfCommonInB ){
+                    //alter
+                    return processPatch(patch, path.append(startOfCommonInA - 1), original, target);
+                } else {
+                    //fuck it
+                    patch.add(new RemoveOperation(path.append(startOfCommonInA - 1)));
+                    return true;
+                }
+            }
+
+            if ( !listA.contains(target) ){
+                patch.add( new AddOperation(path.append(startOfCommonInA-1),target ));
+                return true;
+            }
+
+        } else {
+
+            if ( listA.size() == common.size() ){
+                if ( startOfCommonInB != 0 ) {
+                    patch.add(new AddOperation(path.append(0), listB.get(0)));
+                } else {
+                    patch.add(new AddOperation(path.append("-"), listB.get(startOfCommonInB + common.size())));
+                }
+                return true;
+            }
+
+            if ( listB.size() == common.size() ){
+                patch.add( new RemoveOperation(path.append(listA.size()-1)));
+                return true;
+            }
+
+            //move on position before to extend lcs
+            JsonElement original = listA.get(startOfCommonInA + common.size());
+            JsonElement target = null;
+            try {
+                target = listB.get(startOfCommonInB + common.size());
+            } catch ( IndexOutOfBoundsException e ){
+                //fuck it
+            }
+
+            if ( listB.contains(original) && listA.contains(target) ){
+                //we can move or copy the target from where its located
+                //we leave the original and the common the fuck alone
+
+                if ( common.contains(target) ){
+                    //so target is in common and also outside of common lets call this a copy
+                    for ( Integer i: findOccurnacesIn(original, listA)){
+                        if ( i >= startOfCommonInA || i < startOfCommonInA + listA.size() ){
+                            //TODO add copy operation
+//                            patch.add(new CopyOperation(path.append(i), path.append(i) ) );
+                            patch.add( new AddOperation(path.append(startOfCommonInA + common.size()),target ));
+                            return true;
+                        }
+                    }
+                    throw new JsonPatchException("theoretically Unreachable");
+
+                } else {
+                    //move then?
+                    patch.add(new MoveOperation(path.append(startOfCommonInA+ common.size() -1), path.append(listA.indexOf(target)) ) );
+                    return true;
+                }
+            }
+
+            if ( listB.contains(original) && !listA.contains(target) ){
+                //original exist but not here and target is something new
+                //dont fuck with the target and just move the original and don't fuck with common
+                for ( Integer i: findOccurnacesIn(original, listA)){
+                    if ( i < startOfCommonInA || i > startOfCommonInA + listA.size()-1 ){
+                        patch.add(new MoveOperation(path.append(startOfCommonInA + common.size() -1), path.append(i) ) );
                         return true;
                     }
                 }
 
-                processPatch(patch, path.append(c), valueA, valueB);
+                //must be unneeded if we made it here
+                patch.add(new RemoveOperation(path.append(startOfCommonInA + common.size())));
+                return true;
+            }
 
+            if ( !listB.contains(original)  ){
+                //add or alter
+                if ( startOfCommonInA == startOfCommonInB ){
+                    //alter
+                    return processPatch(patch, path.append(startOfCommonInA + common.size()), original, target);
+                } else {
+                    //fuck it
+                    patch.add(new RemoveOperation(path.append(startOfCommonInA + common.size())));
+                    return true;
+                }
+            }
+
+            if ( !listA.contains(target) ){
+                patch.add( new AddOperation(path.append(startOfCommonInA+ common.size() ),target ));
                 return true;
             }
         }
-        if(  c < elementB.size()  ){
-            patch.add(new AddOperation(path.append("-"), elementB.getAsJsonArray().get(c)));
-            return true;
-        }
-        if ( c < elementA.size() ){
-            patch.add(new RemoveOperation(path.append(c)));
-            return true;
-        }
+
+
+//        int c;
+//        for ( c=0; c < elementA.size() && c < elementB.size(); c++ ){
+//            JsonElement valueA = elementA.get(c);
+//            JsonElement valueB = elementB.get(c);
+//
+//            if ( !valueA.equals(valueB)) {
+//
+//                //see if valueB is in later position of elementA and bring it forward
+//                for ( int b = c+1; b < elementA.size(); b++ ){
+//                    if ( elementA.get(b).equals(valueB) ){
+//                        patch.add(new MoveOperation(path.append(b), path.append(c)));
+//                        return true;
+//                    }
+//                }
+//
+//                //see if valueA is in later position of elementB and toss it back
+//                for ( int b = c+1; b < elementB.size(); b++ ){
+//                    if ( elementB.get(b).equals(valueA) ){
+//                        if ( b >= elementA.size() ){
+//                            break;
+//                        }
+//                        patch.add(new MoveOperation(path.append(c),path.append(b)));
+//                        return true;
+//                    }
+//                }
+//
+//                processPatch(patch, path.append(c), valueA, valueB);
+//
+//                return true;
+//            }
+//        }
+//        if(  c < elementB.size()  ){
+//            patch.add(new AddOperation(path.append("-"), elementB.getAsJsonArray().get(c)));
+//            return true;
+//        }
+//        if ( c < elementA.size() ){
+//            patch.add(new RemoveOperation(path.append(c)));
+//            return true;
+//        }
         throw new JsonPatchException("theoretically Unreachable");
+    }
+
+
+    private <T> List<Integer> findOccurnacesIn(T item, List<T> list){
+        List<Integer> result = new ArrayList<Integer>();
+        for ( int c = 0; c < list.size(); c++){
+
+            if ( list.get(c).equals(item) ){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    private List<JsonElement> convertToList(JsonArray array){
+        List<JsonElement> result = new ArrayList<JsonElement>();
+
+        for ( JsonElement element: array){
+            result.add(element);
+        }
+
+        return result;
     }
 
 

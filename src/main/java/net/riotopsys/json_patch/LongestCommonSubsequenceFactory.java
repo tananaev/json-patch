@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * Created by afitzgerald on 9/4/14.
  */
-public class LongestCommonSubsequenceFactory<T> {
+public class LongestCommonSubsequenceFactory {
 
-    public List<T> search(List<T> seqA, List<T> seqB) {
+    public <T> List<T> search(List<T> seqA, List<T> seqB) {
         if ( seqA.size() > seqB.size()){
             return subsearch( seqB, seqA );
         } else {
@@ -15,7 +15,7 @@ public class LongestCommonSubsequenceFactory<T> {
         }
     }
 
-    private List<T> subsearch(List<T> shortList, List<T> longList) {
+    private <T> List<T> subsearch(List<T> shortList, List<T> longList) {
 //        System.out.println(String.format("%s %s",shortList, longList) );
         if ( shortList.isEmpty() ){
             return shortList;
@@ -39,11 +39,21 @@ public class LongestCommonSubsequenceFactory<T> {
         }
     }
 
-    private boolean checkEquals(List<T> shortList, List<T> longList, int index) {
+    private <T> boolean checkEquals(List<T> shortList, List<T> longList, int index) {
         boolean result = true;
         for ( int c = 0; c < shortList.size();  c++ ){
             result = result && shortList.get(c).equals(longList.get(c+index));
         }
         return result;
     }
+
+    public <T> int findStartIndex( List<T> sub, List<T> full ){
+        for( int c = 0; c < full.size(); c++ ) {
+            if (checkEquals(sub, full, c)) {
+                return c;
+            }
+        }
+        return -1;
+    }
+
 }
