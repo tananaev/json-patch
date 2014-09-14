@@ -43,7 +43,7 @@ public class ReplaceOperation extends AbsOperation {
 
             int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
-            array.remove(index);
+//            array.remove(index);
             if ( index < array.size() ) {
                 array.set(index, data);
             } else {

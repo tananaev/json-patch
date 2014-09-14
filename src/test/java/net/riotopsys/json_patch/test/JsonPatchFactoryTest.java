@@ -50,16 +50,18 @@ public class JsonPatchFactoryTest {
             temp.add(temp2);
         }
 
-//        int index = 12;
 //        int index = 19;
 //        int index = 21;
 //        int index = 24;
 //        int index = 25;
-        int index = 26;
+//        int index = 26;
+//        int index = 27;
+//        int index = 36;
+//        int index = 40;
+//        int index = 41;
 
-        return temp.subList(index, index+1);
-//        return temp.subList(17, 19);
-//        return temp;
+//        return temp.subList(index, index+1);
+        return temp;
     }
 
     public JsonPatchFactoryTest( JsonPatchTestCase testCase ) {
