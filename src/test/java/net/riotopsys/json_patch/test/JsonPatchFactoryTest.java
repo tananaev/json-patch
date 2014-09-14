@@ -50,14 +50,6 @@ public class JsonPatchFactoryTest {
             temp.add(temp2);
         }
 
-//        int index = 19;
-//        int index = 21;
-//        int index = 24;
-//        int index = 25;
-//        int index = 26;
-//        int index = 27;
-//        int index = 36;
-//        int index = 40;
 //        int index = 41;
 
 //        return temp.subList(index, index+1);
@@ -70,17 +62,11 @@ public class JsonPatchFactoryTest {
 
     @Test
     public void runCase(){
-//        System.out.println(String.format("running ... A: '%s' B: '%s'", testCase.first, testCase.second));
 
         JsonPatchFactory jpf = new JsonPatchFactory();
         JsonPatch patch = jpf.create(testCase.first, testCase.second);
 
         JsonElement result = patch.apply(testCase.first);
-
-
-//        System.out.println(String.format("patch \n%s", gson.toJson(patch)));
-//        System.out.println(String.format("output '%s'", result));
-
 
         Assert.assertEquals(testCase.second, result);
 

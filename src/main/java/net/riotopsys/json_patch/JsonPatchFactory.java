@@ -137,7 +137,6 @@ public class JsonPatchFactory {
             return expandCommon(patch, path, listA, listB, common, startOfCommonInA, targetPos, targetPosA);
         }
 
-//        throw new JsonPatchException("theoretically Unreachable");
     }
 
     private boolean expandCommon(JsonPatch patch, JsonPath path, List<JsonElement> listA, List<JsonElement> listB, List<JsonElement> common, int startOfCommonInA, int targetPos, int targetPosA) {
@@ -165,7 +164,6 @@ public class JsonPatchFactory {
                 return true;
             }
         }
-//        patch.addLast(new AddOperation(path.append((targetPosA ==-1) ? 0: targetPosA), target));
         patch.addLast(new AddOperation(path.append(targetPosA), target));
         return true;
     }
