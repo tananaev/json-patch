@@ -1,3 +1,19 @@
+/*
+ Copyright 2014 C. A. Fitzgerald
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 package net.riotopsys.json_patch;
 
 import com.google.gson.*;
@@ -95,14 +111,6 @@ public class JsonPatchFactory {
         throw new JsonPatchException("theoretically Unreachable");
     }
 
-    private SortedSet<String> extractProps(JsonObject elementA) {
-        SortedSet<String> result = new TreeSet<String>();
-        for ( Map.Entry<String, JsonElement> entry : elementA.entrySet() ){
-            result.add(entry.getKey());
-        }
-        return result;
-    }
-
     private boolean processArrayPatch( JsonPatch patch, JsonPath path, JsonArray elementA, JsonArray elementB ) {
         List<JsonElement> listA = convertToList(elementA);
         List<JsonElement> listB = convertToList(elementB);
@@ -137,6 +145,14 @@ public class JsonPatchFactory {
             return expandCommon(patch, path, listA, listB, common, startOfCommonInA, targetPos, targetPosA);
         }
 
+    }
+
+    private SortedSet<String> extractProps(JsonObject elementA) {
+        SortedSet<String> result = new TreeSet<String>();
+        for ( Map.Entry<String, JsonElement> entry : elementA.entrySet() ){
+            result.add(entry.getKey());
+        }
+        return result;
     }
 
     private boolean expandCommon(JsonPatch patch, JsonPath path, List<JsonElement> listA, List<JsonElement> listB, List<JsonElement> common, int startOfCommonInA, int targetPos, int targetPosA) {
