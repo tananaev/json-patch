@@ -21,6 +21,10 @@
     <artifactId>json_patch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <name>json_patch</name>
+    <description>An RFC 6902 (JSON Patch) compliant utility</description>
+    <url>https://github.com/riotopsys/json-patch</url>
+
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -39,8 +43,8 @@
         <url>https://github.com/riotopsys/json-patch</url>
         <connection>scm:git:git@github.com:riotopsys/json-patch.git</connection>
         <developerConnection>scm:git:git@github.com:riotopsys/json-patch.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <licenses>
         <license>
@@ -78,6 +82,20 @@
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
