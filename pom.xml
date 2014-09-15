@@ -19,11 +19,19 @@
 
     <groupId>net.riotopsys</groupId>
     <artifactId>json_patch</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.0-SNAPSHOT</version>
 
     <name>json_patch</name>
     <description>An RFC 6902 (JSON Patch) compliant utility</description>
     <url>https://github.com/riotopsys/json-patch</url>
+
+    <developers>
+        <developer>
+            <id>riotopsys</id>
+            <name>C. A. Fitzgerald</name>
+            <email>me+json_patch@riotopsys.net</email>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
