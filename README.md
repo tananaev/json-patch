@@ -37,7 +37,20 @@ JsonPatch patch = jpf.create(original, target);
 ```
 
 ## Download
-TBD
+
+### maven
+```
+<dependency>
+    <groupId>net.riotopsys</groupId>
+    <artifactId>json_patch</artifactId>
+    <version>0.0.0</version>
+</dependency>
+```
+
+### gradle
+```
+compile 'net.riotopsys:json_patch:0.0.0'
+```
 
 
 [1]:http://tools.ietf.org/html/rfc6902
