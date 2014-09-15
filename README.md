@@ -1,7 +1,7 @@
 # json-patch
 An RFC 6902 (JSON Patch) compliant utility
 
-Status Status: [![Build Status](https://secure.travis-ci.org/riotopsys/rss-fetch.png)](http://travis-ci.org/riotopsys/json-patch)
+Status Status: [![Build Status](https://secure.travis-ci.org/riotopsys/json-patch.png)](http://travis-ci.org/riotopsys/json-patch)
 
 ## Summary
 This is a java implementation of [RFC 6902 (JSON Patch)][1]
