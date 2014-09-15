@@ -19,7 +19,7 @@
 
     <groupId>net.riotopsys</groupId>
     <artifactId>json_patch</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -39,7 +39,7 @@
         <url>https://github.com/riotopsys/json-patch</url>
         <connection>scm:git:git@github.com:riotopsys/json-patch.git</connection>
         <developerConnection>scm:git:git@github.com:riotopsys/json-patch.git</developerConnection>
-      <tag>json_patch-0.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <licenses>
