@@ -16,7 +16,9 @@
 
 package com.tananaev.jsonpatch;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.tananaev.jsonpatch.gson.JsonPathSerializer;
 import com.tananaev.jsonpatch.operation.AbsOperation;
 
 import java.util.LinkedList;
@@ -29,6 +31,13 @@ public class JsonPatch extends LinkedList<AbsOperation> {
             result = operation.apply(result);
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(JsonPath.class, new JsonPathSerializer());
+        return gsonBuilder.create().toJson(this);
     }
 
 }
