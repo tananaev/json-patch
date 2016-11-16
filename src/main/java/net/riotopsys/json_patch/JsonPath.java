@@ -22,22 +22,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by afitzgerald on 8/4/14.
- */
 public class JsonPath {
 
     private List<String> path;
 
     public JsonPath(String path) {
-        this.path = new ArrayList<String>(Arrays.asList(path.split("/")));
+        this.path = new ArrayList<>(Arrays.asList(path.split("/")));
         if ( this.path.size() > 0 ) {
             this.path.remove(0);
         }
     }
 
     private JsonPath(List<String> path) {
-        this.path = new ArrayList<String>(path);
+        this.path = new ArrayList<>(path);
     }
 
     @Override
@@ -105,4 +102,5 @@ public class JsonPath {
         }
         return original;
     }
+
 }

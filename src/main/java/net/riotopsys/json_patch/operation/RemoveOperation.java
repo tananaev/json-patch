@@ -4,12 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import net.riotopsys.json_patch.JsonPath;
 
-import java.util.List;
-import java.util.Map;
-
-/**
- * Created by afitzgerald on 8/5/14.
- */
 public class RemoveOperation extends AbsOperation{
 
     public RemoveOperation( JsonPath path ) {
@@ -28,22 +22,16 @@ public class RemoveOperation extends AbsOperation{
         JsonElement item = path.head().navigate(result);
 
         if ( item.isJsonObject() ){
-//            Map<String, JsonElement> map = getBackingMap(item.getAsJsonObject());
-
-//            map.remove(path.tail());
-
             item.getAsJsonObject().remove(path.tail());
-
         } else if ( item.isJsonArray() ){
-
             JsonArray array = item.getAsJsonArray();
 
             int index = (path.tail().equals("-")) ? array.size() : Integer.valueOf(path.tail());
 
-           array.remove(index);
-
+            array.remove(index);
         }
 
         return result;
     }
+
 }

@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by afitzgerald on 8/5/14.
- */
 public class AddOperation extends AbsOperation {
 
     public JsonElement data;
@@ -58,6 +55,5 @@ public class AddOperation extends AbsOperation {
 
         return result;
     }
-
 
 }

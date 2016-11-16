@@ -16,17 +16,20 @@
 
 package net.riotopsys.json_patch;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.riotopsys.json_patch.operation.AddOperation;
 import net.riotopsys.json_patch.operation.MoveOperation;
 import net.riotopsys.json_patch.operation.RemoveOperation;
 import net.riotopsys.json_patch.operation.ReplaceOperation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-/**
- * Created by afitzgerald on 8/4/14.
- */
 public class JsonPatchFactory {
 
     private LongestCommonSubsequenceFactory lcsf = new LongestCommonSubsequenceFactory();
@@ -40,7 +43,6 @@ public class JsonPatchFactory {
         while ( loop ) {
             JsonElement temp = patch.apply( elementA );
             loop = processPatch(patch, new JsonPath("/"), temp, elementB);
-//            pp.process(patch);
         }
 
         return patch;
@@ -76,14 +78,10 @@ public class JsonPatchFactory {
             if ( elementB.has( prop ) ){
                 elementBProps.remove(prop);
                 JsonElement bValue = elementB.get(prop);
-                if ( aValue.equals(bValue) ) {
-                    // items fully match
-                    continue;
-                } else {
+                if (!aValue.equals(bValue)) {
                     // item exist in both but do not match
                     return processPatch( patch, path.append(prop), aValue, bValue );
                 }
-
             } else {
                 //item in original but not in target
 
@@ -95,7 +93,6 @@ public class JsonPatchFactory {
                     }
                 }
 
-                //fuck it
                 patch.addLast(new RemoveOperation(path.append(prop)));
                 return true;
             }
@@ -104,7 +101,6 @@ public class JsonPatchFactory {
         if ( elementBProps.size() != 0 ){
             String prop = elementBProps.first();
             //look for copy
-            //fuck it
             patch.addLast(new AddOperation(path.append(prop), elementB.get(prop)));
             return true;
         }
@@ -137,7 +133,7 @@ public class JsonPatchFactory {
 
         if ( startOfCommonInB != 0 ){
             int targetPos = startOfCommonInB - 1;
-            int targetPosA = startOfCommonInA ;
+            int targetPosA = startOfCommonInA;
             return expandCommon(patch, path, listA, listB, common, startOfCommonInA, targetPos, targetPosA);
         } else {
             int targetPos = startOfCommonInB + common.size();
@@ -186,7 +182,7 @@ public class JsonPatchFactory {
 
 
     private <T> List<Integer> findOccurnacesIn(T item, List<T> list){
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for ( int c = 0; c < list.size(); c++){
 
             if ( list.get(c).equals(item) ){
@@ -197,7 +193,7 @@ public class JsonPatchFactory {
     }
 
     private List<JsonElement> convertToList(JsonArray array){
-        List<JsonElement> result = new ArrayList<JsonElement>();
+        List<JsonElement> result = new ArrayList<>();
 
         for ( JsonElement element: array){
             result.add(element);
@@ -205,6 +201,5 @@ public class JsonPatchFactory {
 
         return result;
     }
-
 
 }

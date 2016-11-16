@@ -24,12 +24,11 @@ import net.riotopsys.json_patch.JsonPath;
 
 import java.lang.reflect.Type;
 
-/**
- * Created by afitzgerald on 8/4/14.
- */
 public class JsonPathDeserializer implements JsonDeserializer<JsonPath> {
+
     @Override
     public JsonPath deserialize(JsonElement element, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        return new JsonPath( element.getAsJsonPrimitive().getAsString());
+        return new JsonPath(element.getAsJsonPrimitive().getAsString());
     }
+
 }

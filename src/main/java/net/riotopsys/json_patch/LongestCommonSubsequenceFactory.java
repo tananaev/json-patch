@@ -18,9 +18,6 @@ package net.riotopsys.json_patch;
 
 import java.util.List;
 
-/**
- * Created by afitzgerald on 9/4/14.
- */
 public class LongestCommonSubsequenceFactory {
 
     public <T> List<T> search(List<T> seqA, List<T> seqB) {
@@ -32,7 +29,6 @@ public class LongestCommonSubsequenceFactory {
     }
 
     private <T> List<T> subsearch(List<T> shortList, List<T> longList) {
-//        System.out.println(String.format("%s %s",shortList, longList) );
         if ( shortList.isEmpty() ){
             return shortList;
         }
