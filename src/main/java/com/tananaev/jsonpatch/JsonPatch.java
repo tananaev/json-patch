@@ -14,20 +14,21 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch;
+package com.tananaev.jsonpatch;
 
-public class JsonPatchException extends RuntimeException {
+import com.google.gson.JsonElement;
+import com.tananaev.jsonpatch.operation.AbsOperation;
 
-    public JsonPatchException() {
-    }
+import java.util.LinkedList;
 
-    public JsonPatchException(String message) {
-        super(message);
-    }
+public class JsonPatch extends LinkedList<AbsOperation> {
 
-
-    public JsonPatchException(Throwable cause) {
-        super(cause);
+    public JsonElement apply(JsonElement original) {
+        JsonElement result = original;
+        for ( AbsOperation operation: this){
+            result = operation.apply(result);
+        }
+        return result;
     }
 
 }

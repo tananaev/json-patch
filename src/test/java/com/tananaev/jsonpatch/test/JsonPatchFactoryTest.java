@@ -14,18 +14,18 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch.test;
+package com.tananaev.jsonpatch.test;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import net.riotopsys.json_patch.JsonPatch;
-import net.riotopsys.json_patch.JsonPatchFactory;
-import net.riotopsys.json_patch.JsonPath;
-import net.riotopsys.json_patch.gson.JsonPathDeserializer;
-import net.riotopsys.json_patch.gson.JsonPathSerializer;
-import net.riotopsys.json_patch.test.util.JsonPatchTestCase;
+import com.tananaev.jsonpatch.JsonPatchFactory;
+import com.tananaev.jsonpatch.JsonPath;
+import com.tananaev.jsonpatch.gson.JsonPathDeserializer;
+import com.tananaev.jsonpatch.gson.JsonPathSerializer;
+import com.tananaev.jsonpatch.test.util.JsonPatchTestCase;
+import com.tananaev.jsonpatch.JsonPatch;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

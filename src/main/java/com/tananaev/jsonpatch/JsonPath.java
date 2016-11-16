@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch;
+package com.tananaev.jsonpatch;
 
 import com.google.gson.JsonElement;
 

@@ -14,13 +14,13 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch.gson;
+package com.tananaev.jsonpatch.gson;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.riotopsys.json_patch.JsonPath;
+import com.tananaev.jsonpatch.JsonPath;
 
 import java.lang.reflect.Type;
 

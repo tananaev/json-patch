@@ -14,11 +14,11 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch;
+package com.tananaev.jsonpatch;
 
-import net.riotopsys.json_patch.operation.AbsOperation;
-import net.riotopsys.json_patch.operation.MoveOperation;
-import net.riotopsys.json_patch.operation.RemoveOperation;
+import com.tananaev.jsonpatch.operation.MoveOperation;
+import com.tananaev.jsonpatch.operation.RemoveOperation;
+import com.tananaev.jsonpatch.operation.AbsOperation;
 
 public class PostProcessor {
 

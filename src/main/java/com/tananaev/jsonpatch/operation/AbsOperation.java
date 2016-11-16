@@ -1,9 +1,9 @@
-package net.riotopsys.json_patch.operation;
+package com.tananaev.jsonpatch.operation;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
-import net.riotopsys.json_patch.JsonPath;
+import com.tananaev.jsonpatch.JsonPath;
 
 public abstract class AbsOperation {
 

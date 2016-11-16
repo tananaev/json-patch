@@ -14,21 +14,13 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch;
+package com.tananaev.jsonpatch.test.util;
 
-import com.google.gson.JsonElement;
-import net.riotopsys.json_patch.operation.AbsOperation;
+import java.util.List;
 
-import java.util.LinkedList;
-
-public class JsonPatch extends LinkedList<AbsOperation> {
-
-    public JsonElement apply(JsonElement original) {
-        JsonElement result = original;
-        for ( AbsOperation operation: this){
-            result = operation.apply(result);
-        }
-        return result;
-    }
-
+public class LCSFTestCase {
+    public List<String> A;
+    public List<String> B;
+    public String name;
+    public List<String> expected;
 }

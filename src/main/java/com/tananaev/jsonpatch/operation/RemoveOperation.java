@@ -1,8 +1,8 @@
-package net.riotopsys.json_patch.operation;
+package com.tananaev.jsonpatch.operation;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import net.riotopsys.json_patch.JsonPath;
+import com.tananaev.jsonpatch.JsonPath;
 
 public class RemoveOperation extends AbsOperation{
 

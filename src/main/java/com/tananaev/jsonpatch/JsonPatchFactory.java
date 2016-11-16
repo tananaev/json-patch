@@ -14,15 +14,15 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch;
+package com.tananaev.jsonpatch;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.riotopsys.json_patch.operation.AddOperation;
-import net.riotopsys.json_patch.operation.MoveOperation;
-import net.riotopsys.json_patch.operation.RemoveOperation;
-import net.riotopsys.json_patch.operation.ReplaceOperation;
+import com.tananaev.jsonpatch.operation.MoveOperation;
+import com.tananaev.jsonpatch.operation.RemoveOperation;
+import com.tananaev.jsonpatch.operation.ReplaceOperation;
+import com.tananaev.jsonpatch.operation.AddOperation;
 
 import java.util.ArrayList;
 import java.util.List;

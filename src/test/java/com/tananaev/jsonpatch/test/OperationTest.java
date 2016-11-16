@@ -14,15 +14,15 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch.test;
+package com.tananaev.jsonpatch.test;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import net.riotopsys.json_patch.JsonPath;
-import net.riotopsys.json_patch.operation.AddOperation;
-import net.riotopsys.json_patch.operation.ReplaceOperation;
+import com.tananaev.jsonpatch.JsonPath;
+import com.tananaev.jsonpatch.operation.AddOperation;
+import com.tananaev.jsonpatch.operation.ReplaceOperation;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -14,11 +14,20 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch.test.util;
+package com.tananaev.jsonpatch;
 
-import com.google.gson.JsonElement;
+public class JsonPatchException extends RuntimeException {
 
-public class JsonPatchTestCase {
-    public JsonElement first;
-    public JsonElement  second;
+    public JsonPatchException() {
+    }
+
+    public JsonPatchException(String message) {
+        super(message);
+    }
+
+
+    public JsonPatchException(Throwable cause) {
+        super(cause);
+    }
+
 }

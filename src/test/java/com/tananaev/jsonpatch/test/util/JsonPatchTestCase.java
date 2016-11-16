@@ -14,21 +14,11 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch.gson;
+package com.tananaev.jsonpatch.test.util;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import net.riotopsys.json_patch.JsonPath;
 
-import java.lang.reflect.Type;
-
-public class JsonPathSerializer implements JsonSerializer<JsonPath> {
-
-    @Override
-    public JsonElement serialize(JsonPath jsonPath, Type type, JsonSerializationContext jsonSerializationContext) {
-        return new JsonPrimitive(jsonPath.toString());
-    }
-
+public class JsonPatchTestCase {
+    public JsonElement first;
+    public JsonElement  second;
 }

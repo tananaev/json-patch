@@ -1,9 +1,9 @@
-package net.riotopsys.json_patch.operation;
+package com.tananaev.jsonpatch.operation;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.riotopsys.json_patch.JsonPath;
+import com.tananaev.jsonpatch.JsonPath;
 
 public class ReplaceOperation extends AbsOperation {
 

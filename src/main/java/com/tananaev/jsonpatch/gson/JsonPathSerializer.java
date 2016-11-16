@@ -14,13 +14,21 @@
  limitations under the License.
  */
 
-package net.riotopsys.json_patch.test.util;
+package com.tananaev.jsonpatch.gson;
 
-import java.util.List;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.tananaev.jsonpatch.JsonPath;
 
-public class LCSFTestCase {
-    public List<String> A;
-    public List<String> B;
-    public String name;
-    public List<String> expected;
+import java.lang.reflect.Type;
+
+public class JsonPathSerializer implements JsonSerializer<JsonPath> {
+
+    @Override
+    public JsonElement serialize(JsonPath jsonPath, Type type, JsonSerializationContext jsonSerializationContext) {
+        return new JsonPrimitive(jsonPath.toString());
+    }
+
 }
