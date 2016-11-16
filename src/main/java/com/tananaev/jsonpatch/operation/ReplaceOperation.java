@@ -3,10 +3,12 @@ package com.tananaev.jsonpatch.operation;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 import com.tananaev.jsonpatch.JsonPath;
 
 public class ReplaceOperation extends AbsOperation {
 
+    @SerializedName("value")
     public JsonElement data;
 
     public ReplaceOperation(JsonPath path, JsonElement data) {

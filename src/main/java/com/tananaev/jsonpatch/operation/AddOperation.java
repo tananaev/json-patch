@@ -2,6 +2,7 @@ package com.tananaev.jsonpatch.operation;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.annotations.SerializedName;
 import com.tananaev.jsonpatch.JsonPath;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 public class AddOperation extends AbsOperation {
 
+    @SerializedName("value")
     public JsonElement data;
 
     public AddOperation(JsonPath path, JsonElement data) {
