@@ -38,10 +38,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by afitzgerald on 8/6/14.
- */
-//@Ignore
 @RunWith(Parameterized.class)
 public class JsonPatchFactoryTest {
 
@@ -66,9 +62,6 @@ public class JsonPatchFactoryTest {
             temp.add(temp2);
         }
 
-//        int index = 41;
-
-//        return temp.subList(index, index+1);
         return temp;
     }
 

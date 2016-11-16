@@ -29,9 +29,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-/**
- * Created by afitzgerald on 8/4/14.
- */
 public class JsonPathTest {
 
     @Test
@@ -43,7 +40,6 @@ public class JsonPathTest {
         Assert.assertEquals(null, path.tail());
 
         Assert.assertEquals("/", path.head().toString());
-
     }
 
 
@@ -56,7 +52,6 @@ public class JsonPathTest {
         Assert.assertEquals("b", path.tail());
 
         Assert.assertEquals("/a/0", path.head().toString());
-
     }
 
     @Test
@@ -66,7 +61,6 @@ public class JsonPathTest {
         Assert.assertEquals("/a/0/b/c", path.append("c").toString());
 
         Assert.assertEquals("/a/0/b/d/e", path.append("d/e").toString());
-
     }
 
     @Test
@@ -107,4 +101,5 @@ public class JsonPathTest {
 
         Assert.assertEquals(parser.parse("{\"b\":\"stuff\"}"), path.navigate(element));
     }
+
 }

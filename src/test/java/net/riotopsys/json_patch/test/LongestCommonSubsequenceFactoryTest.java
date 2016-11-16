@@ -39,9 +39,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by afitzgerald on 9/4/14.
- */
 @RunWith(Parameterized.class)
 public class LongestCommonSubsequenceFactoryTest {
 
@@ -97,4 +94,5 @@ public class LongestCommonSubsequenceFactoryTest {
         }
         return result;
     }
+
 }
