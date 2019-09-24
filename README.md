@@ -12,14 +12,14 @@ This project is a fork of the [original library](https://github.com/riotopsys/js
 
 Include dependency via Gradle:
 ```groovy
-compile 'com.tananaev:json-patch:1.0'
+compile 'com.tananaev:json-patch:1.1'
 ```
 or Maven:
 ```xml
 <dependency>
   <groupId>com.tananaev</groupId>
   <artifactId>json-patch</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
 </dependency>
 ```
 
