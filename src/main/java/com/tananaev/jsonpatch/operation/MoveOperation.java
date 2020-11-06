@@ -23,17 +23,17 @@ public class MoveOperation extends AbsOperation{
     }
 
     @Override
-    public JsonElement apply(JsonElement original) {
+    public void applyInPlace(InPlaceElementWrapper inPlaceElement) {
+        JsonElement sourceElement = inPlaceElement.getJsonElement();
+        JsonElement value = from.navigate(sourceElement);
 
-        JsonElement value = from.navigate(original);
+        JsonElement existingElement = from.head().navigate(sourceElement);
+        JsonElement destination = path.head().navigate(sourceElement);
 
-        JsonElement source = from.head().navigate(original);
-        JsonElement destination = path.head().navigate(original);
-
-        if ( source.isJsonObject() ){
-            source.getAsJsonObject().remove(from.tail());
-        } else if ( source.isJsonArray() ){
-            JsonArray array = source.getAsJsonArray();
+        if ( existingElement.isJsonObject() ){
+            existingElement.getAsJsonObject().remove(from.tail());
+        } else if ( existingElement.isJsonArray() ){
+            JsonArray array = existingElement.getAsJsonArray();
 
             int index = (from.tail().equals("-")) ? array.size() : Integer.valueOf(from.tail());
 
@@ -63,8 +63,6 @@ public class MoveOperation extends AbsOperation{
                 array.add(stuff);
             }
         }
-
-        return original;
     }
 
 }

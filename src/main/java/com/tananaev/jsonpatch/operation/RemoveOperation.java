@@ -16,9 +16,9 @@ public class RemoveOperation extends AbsOperation{
     }
 
     @Override
-    public JsonElement apply(JsonElement original) {
+    public void applyInPlace(InPlaceElementWrapper inPlaceElement) {
 
-        JsonElement item = path.head().navigate(original);
+        JsonElement item = path.head().navigate(inPlaceElement.getJsonElement());
 
         if ( item.isJsonObject() ){
             item.getAsJsonObject().remove(path.tail());
@@ -30,7 +30,6 @@ public class RemoveOperation extends AbsOperation{
             array.remove(index);
         }
 
-        return original;
     }
 
 }
