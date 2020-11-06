@@ -17,9 +17,8 @@ public class RemoveOperation extends AbsOperation{
 
     @Override
     public JsonElement apply(JsonElement original) {
-        JsonElement result = duplicate( original );
 
-        JsonElement item = path.head().navigate(result);
+        JsonElement item = path.head().navigate(original);
 
         if ( item.isJsonObject() ){
             item.getAsJsonObject().remove(path.tail());
@@ -31,7 +30,7 @@ public class RemoveOperation extends AbsOperation{
             array.remove(index);
         }
 
-        return result;
+        return original;
     }
 
 }

@@ -26,7 +26,7 @@ import java.util.LinkedList;
 public class JsonPatch extends LinkedList<AbsOperation> {
 
     public JsonElement apply(JsonElement original) {
-        JsonElement result = original;
+        JsonElement result = original.deepCopy();
         for ( AbsOperation operation: this){
             result = operation.apply(result);
         }

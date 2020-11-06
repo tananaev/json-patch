@@ -24,12 +24,11 @@ public class MoveOperation extends AbsOperation{
 
     @Override
     public JsonElement apply(JsonElement original) {
-        JsonElement result = duplicate( original );
 
-        JsonElement value = from.navigate(result);
+        JsonElement value = from.navigate(original);
 
-        JsonElement source = from.head().navigate(result);
-        JsonElement destination = path.head().navigate(result);
+        JsonElement source = from.head().navigate(original);
+        JsonElement destination = path.head().navigate(original);
 
         if ( source.isJsonObject() ){
             source.getAsJsonObject().remove(from.tail());
@@ -65,7 +64,7 @@ public class MoveOperation extends AbsOperation{
             }
         }
 
-        return result;
+        return original;
     }
 
 }

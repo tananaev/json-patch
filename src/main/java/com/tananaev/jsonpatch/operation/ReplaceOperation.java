@@ -23,9 +23,8 @@ public class ReplaceOperation extends AbsOperation {
 
     @Override
     public JsonElement apply(JsonElement original) {
-        JsonElement result = duplicate( original );
 
-        JsonElement item = path.head().navigate(result);
+        JsonElement item = path.head().navigate(original);
 
         if ( item.isJsonObject() ){
             JsonObject object = item.getAsJsonObject();
@@ -48,7 +47,7 @@ public class ReplaceOperation extends AbsOperation {
             return data;
         }
 
-        return result;
+        return original;
     }
 
 }
