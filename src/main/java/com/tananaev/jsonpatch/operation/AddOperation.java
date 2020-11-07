@@ -25,10 +25,9 @@ public class AddOperation extends AbsOperation {
     }
 
     @Override
-    public JsonElement apply(JsonElement original) {
-        JsonElement result = duplicate( original );
-
-        JsonElement item = path.head().navigate(result);
+    public void applyInPlace(InPlaceElementWrapper inPlaceElement){
+        JsonElement sourceElement = inPlaceElement.getJsonElement();
+        JsonElement item = path.head().navigate(sourceElement);
 
         if ( item.isJsonObject() ){
             item.getAsJsonObject().add(path.tail(),data);
@@ -54,8 +53,6 @@ public class AddOperation extends AbsOperation {
             }
 
         }
-
-        return result;
     }
 
 }

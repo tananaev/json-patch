@@ -22,20 +22,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.tananaev.jsonpatch.JsonPath;
 import com.tananaev.jsonpatch.operation.AddOperation;
+import com.tananaev.jsonpatch.operation.InPlaceElementWrapper;
 import com.tananaev.jsonpatch.operation.ReplaceOperation;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class OperationTest {
 
-    @Test
-    public void basicAddWorks(){
-        JsonElement element = new JsonObject();
-
-        JsonElement result = new AddOperation(new JsonPath("/a"), new JsonObject() ).apply(element);
-
-        Assert.assertEquals("{\"a\":{}}", result.toString());
-    }
 
     @Test
     public void replaceRootNullWithPrimitive(){

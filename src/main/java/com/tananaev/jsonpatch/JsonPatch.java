@@ -20,17 +20,19 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.tananaev.jsonpatch.gson.JsonPathSerializer;
 import com.tananaev.jsonpatch.operation.AbsOperation;
+import com.tananaev.jsonpatch.operation.InPlaceElementWrapper;
 
 import java.util.LinkedList;
 
 public class JsonPatch extends LinkedList<AbsOperation> {
 
     public JsonElement apply(JsonElement original) {
-        JsonElement result = original;
+        JsonElement result = original.deepCopy();
+        InPlaceElementWrapper inPlaceElement = new InPlaceElementWrapper(result);
         for ( AbsOperation operation: this){
-            result = operation.apply(result);
+            operation.applyInPlace(inPlaceElement);
         }
-        return result;
+        return inPlaceElement.getJsonElement();
     }
 
     @Override
