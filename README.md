@@ -1,7 +1,5 @@
 # JSON Patch Library - json-patch
 
-[![Build Status](https://travis-ci.org/tananaev/json-patch.svg?branch=master)](https://travis-ci.org/tananaev/json-patch)
-
 ## Overview
 
 Java implementation of [RFC 6902 (JSON Patch)](http://tools.ietf.org/html/rfc6902) standard. This library is based on Google Gson JSON library.
