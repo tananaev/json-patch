@@ -10,7 +10,7 @@ This project is a fork of the [original library](https://github.com/riotopsys/js
 
 Include dependency via Gradle:
 ```groovy
-compile 'com.tananaev:json-patch:1.1'
+compile 'com.tananaev:json-patch:1.2'
 ```
 or Maven:
 ```xml
