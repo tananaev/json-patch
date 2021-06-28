@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.8.5'
-    testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.8.7'
+    testCompile 'junit:junit:4.13.2'
 }
 
 if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
